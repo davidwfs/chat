@@ -23,6 +23,8 @@ app.use(morgan('combined', {
   stream: { write: msg => log.info(msg) },
 }));
 
+app.use(express.static(`${__dirname}/../public`));
+
 app.use('/value', value);
 
 export default server;
