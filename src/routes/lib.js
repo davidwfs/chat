@@ -1,8 +1,8 @@
 import express from 'express';
-import value from '../controllers/value';
+import value from '../controllers/lib';
 
 const router = express.Router();
 
-router.get('/', value.get);
+router.get('/socket.js', value.socket);
 
 export default router;
