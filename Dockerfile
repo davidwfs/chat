@@ -10,5 +10,6 @@ ADD . .
 
 RUN npm install
 RUN npm run build
+COPY src/public dist/public
 
 CMD npm start
