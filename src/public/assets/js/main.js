@@ -13,7 +13,8 @@ const showMessages = messages => messages.forEach(showMessage);
 function submitMsg(event) {
   event.preventDefault();
   const form = event.target;
-  const { value: message } = form.querySelector('[name="message"]');
+  const textarea = form.querySelector('[name="message"]');
+  const { value: message } = textarea;
   const headers = new Headers({
     'Content-Type': 'application/json; charset=utf-8',
   });
@@ -22,7 +23,11 @@ function submitMsg(event) {
     headers,
     method: 'POST',
     body: JSON.stringify({ message }),
-  }).catch(err => console.log(err));
+  })
+    .then(() => {
+      textarea.value = '';
+    })
+    .catch(err => console.log(err));
 }
 
 function loadMessages() {
