@@ -3,13 +3,15 @@ version: "3"
 services:
   app:
     build: .
-    container_name: chat
+    container_name: app_chat
     restart: always
     volumes:
       - .:/usr/app
     ports:
       - "5000:5000"
     environment:
+      MONGO_INITDB_HOST: db_chat
+      MONGO_INITDB_DBNAME: chat
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     command:
@@ -17,6 +19,7 @@ services:
 
   mongo:
     image: mongo
+    container_name: db_chat
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -24,9 +27,10 @@ services:
 
   mongo-express:
     image: mongo-express
+    container_name: dash_chat
     restart: always
     ports:
-      - 8081:8081
+      - 5001:8081
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example

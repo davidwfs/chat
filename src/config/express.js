@@ -5,7 +5,6 @@ import morgan from 'morgan';
 import cors from 'cors';
 import socket from 'socket.io';
 
-import mongoose from 'mongoose';
 import log from '../services/winston';
 import message from '../routes/message';
 import lib from '../routes/lib';

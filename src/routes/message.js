@@ -1,9 +1,9 @@
 import express from 'express';
-import value from '../controllers/message';
+import message from '../controllers/message';
 
 const router = express.Router();
 
-router.get('/', value.get);
-router.post('/', value.post);
+router.get('/', message.get);
+router.post('/', message.post);
 
 export default router;
