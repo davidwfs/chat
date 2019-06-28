@@ -1,18 +1,25 @@
-const messages = ['v1', 'v2', 'v3'];
+import Message from '../models/message';
 
 export default {
 
-  get(req, res) {
+  async get(req, res) {
+    const messages = await Message.find();
+
     res.status(200).send(messages);
   },
 
-  post(req, res) {
+  async post(req, res) {
     const { io } = req;
-    const { message } = req.body;
+    const { content } = req.body;
+    const message = new Message({ content });
 
-    messages.push(message);
-    io.emit('postMessage', message);
-    res.send(message);
+    try {
+      const registredMessage = await message.save();
+      io.emit('postMessage', registredMessage);
+      res.send(registredMessage);
+    } catch (error) {
+      res.status(500).send();
+    }
   },
 
 };
