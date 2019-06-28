@@ -1,10 +1,10 @@
 const select = document.querySelector.bind(document);
 const resToJSON = res => res.json();
 
-function showMessage(message) {
+function showMessage({ content }) {
   const listMessages = select('#list-messages');
   const element = document.createElement('li');
-  element.textContent = message;
+  element.textContent = content;
   listMessages.appendChild(element);
 }
 
@@ -14,7 +14,7 @@ function submitMsg(event) {
   event.preventDefault();
   const form = event.target;
   const textarea = form.querySelector('[name="message"]');
-  const { value: message } = textarea;
+  const { value: content } = textarea;
   const headers = new Headers({
     'Content-Type': 'application/json; charset=utf-8',
   });
@@ -22,7 +22,7 @@ function submitMsg(event) {
   fetch('/message', {
     headers,
     method: 'POST',
-    body: JSON.stringify({ message }),
+    body: JSON.stringify({ content }),
   })
     .then(() => {
       textarea.value = '';
