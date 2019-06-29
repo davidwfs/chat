@@ -10,8 +10,9 @@ export default {
 
   async post(req, res) {
     const { io } = req;
-    const { content } = req.body;
-    const message = new Message({ content });
+    const { content, author } = req.body;
+    const date = new Date().getTime();
+    const message = new Message({ author, content, date });
 
     try {
       const registredMessage = await message.save();
