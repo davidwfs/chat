@@ -7,11 +7,19 @@
     <title>Chat</title>
 </head>
 <body>
-    <div id="list-messages"></div>
-    <form id="form-message">
-        <textarea name="message"></textarea>
-        <button type="submit">enviar</button>
-    </form>
+    <section class="choise-author">
+        <form id="form-author">
+            <input type="text" name="author">
+            <button type="submit">chose</button>
+        </form>
+    </section>
+    <section class="chat">
+        <div id="list-messages"></div>
+        <form id="form-message">
+            <textarea name="message"></textarea>
+            <button type="submit">send</button>
+        </form>
+    </section>
     <script src="lib/socket.js"></script>
     <script src="./assets/js/main.js"></script>
 </body>

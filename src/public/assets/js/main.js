@@ -13,6 +13,7 @@ const showMessages = messages => messages.forEach(showMessage);
 function submitMsg(event) {
   event.preventDefault();
   const form = event.target;
+  const author = localStorage.getItem('author');
   const textarea = form.querySelector('[name="message"]');
   const { value: content } = textarea;
   const headers = new Headers({
@@ -22,7 +23,7 @@ function submitMsg(event) {
   fetch('/message', {
     headers,
     method: 'POST',
-    body: JSON.stringify({ content }),
+    body: JSON.stringify({ author, content }),
   })
     .then(() => {
       textarea.value = '';
@@ -37,12 +38,22 @@ function loadMessages() {
     .catch(err => console.log(err));
 }
 
+function setAuthor(event) {
+  event.preventDefault();
+  const form = event.target;
+  const input = form.querySelector('[name="author"]');
+  const { value: author } = input;
+  localStorage.setItem('author', author);
+}
+
 window.addEventListener('load', () => {
-  const formChat = select('#form-message');
+  const formMessage = select('#form-message');
+  const formAuthor = select('#form-author');
   const socket = io.connect('http://localhost:5000');
 
-  socket.on('postMessage', data => showMessage(data));
-  formChat.addEventListener('submit', submitMsg);
+  socket.on('postMessage', message => showMessage(message));
+  formMessage.addEventListener('submit', submitMsg);
+  formAuthor.addEventListener('submit', setAuthor);
 
   loadMessages();
 });
