@@ -10,6 +10,6 @@ ADD . .
 
 RUN npm install
 RUN npm run build
-COPY src/public dist/public
+RUN cp -r src/public dist
 
 CMD npm start

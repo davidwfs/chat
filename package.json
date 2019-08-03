@@ -11,6 +11,7 @@
         "dev": "cross-env NODE_ENV=developement nodemon src/app.js --exec babel-node"
     },
     "dependencies": {
+        "@babel/polyfill": "^7.4.4",
         "axios": "^0.19.0",
         "body-parser": "^1.18.3",
         "cors": "^2.8.4",

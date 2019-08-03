@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import log from './services/winston';
 import app from './config/express';
 
