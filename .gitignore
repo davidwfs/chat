@@ -1,6 +1,7 @@
-node_modules/
-logs/
-dist/
+node_modules
+logs
+dist
+data
 package-lock.json
 *.log
 yarn.lock
