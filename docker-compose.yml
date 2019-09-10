@@ -1,6 +1,19 @@
 version: "3"
 
 services:
+  client:
+    image: node:alpine
+    container_name: chat_client
+    restart: always
+    working_dir: /usr/app
+    volumes:
+      - ./client:/usr/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    command: "npm start"
+
   server:
     image: node:alpine
     container_name: chat_server
