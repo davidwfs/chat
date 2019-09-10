@@ -3,35 +3,36 @@ version: "3"
 services:
   app:
     build: .
-    container_name: app_chat
+    container_name: chat_app
     restart: always
-    # volumes:
-    #   - .:/usr/app
+    volumes:
+      - ./src:/usr/app/src
     ports:
       - "5000:5000"
     environment:
-      MONGO_INITDB_HOST: db_chat
+      MONGO_INITDB_HOST: chat_mongo
       MONGO_INITDB_DBNAME: chat
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
     depends_on:
       - mongo
-    command:
-      "npm start"
+    command: "npm run dev"
 
   mongo:
     image: mongo
-    container_name: db_chat
+    container_name: chat_mongo
     restart: always
     volumes:
-      - ./data:/data/db
+      - mongo:/data/db
+    ports:
+      - 27017:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
 
   mongo-express:
     image: mongo-express
-    container_name: dash_chat
+    container_name: chat_dash
     restart: always
     ports:
       - 5001:8081
@@ -40,3 +41,7 @@ services:
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
     depends_on:
       - mongo
+
+volumes:
+  mongo:
+    external: false

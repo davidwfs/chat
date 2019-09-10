@@ -6,10 +6,7 @@ EXPOSE 5000
 
 WORKDIR /usr/app
 
-ADD . .
+COPY package.json package.json
+COPY .babelrc .babelrc
 
 RUN npm install
-RUN npm run build
-RUN cp -r src/public dist
-
-CMD npm start
