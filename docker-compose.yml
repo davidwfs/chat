@@ -2,11 +2,12 @@ version: "3"
 
 services:
   app:
-    build: .
+    image: node:alpine
     container_name: chat_app
     restart: always
+    working_dir: /usr/app
     volumes:
-      - ./src:/usr/app/src
+      - .:/usr/app
     ports:
       - "5000:5000"
     environment:
