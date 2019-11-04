@@ -1,7 +1,7 @@
-import mongoose from 'mongoose';
-import log from './winston';
+import mongoose, { ConnectionOptions } from 'mongoose'
+import log from './winston'
 
-async function connectChatDB(times) {
+async function connectChatDB(times: number) {
   setTimeout(async () => {
     try {
       const {
@@ -12,21 +12,20 @@ async function connectChatDB(times) {
       } = process.env;
       await mongoose.connect(`mongodb://${MONGO_INITDB_HOST}:27017`, {
         dbName: MONGO_INITDB_DBNAME,
-        user: MONGO_INITDB_ROOT_USERNAME,
         pass: MONGO_INITDB_ROOT_PASSWORD,
-        auth: { authdb: 'admin' },
+        user: MONGO_INITDB_ROOT_USERNAME,
       });
     } catch (error) {
       if (times) {
-        connectChatDB(times - 1);
+        connectChatDB(times - 1)
       } else {
-        log.error(error);
-        throw error;
+        log.error(error)
+        throw error
       }
     }
-  }, 5000);
+  }, 5000)
 }
 
-connectChatDB(12);
+connectChatDB(12)
 
-export default mongoose;
+export default mongoose

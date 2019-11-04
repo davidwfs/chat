@@ -1,21 +1,20 @@
-import { createLogger, transports } from 'winston';
-import { existsSync, mkdirSync } from 'fs';
+import { existsSync, mkdirSync } from 'fs'
+import { createLogger, transports } from 'winston'
 
 if (!existsSync('logs')) {
-  mkdirSync('logs');
+  mkdirSync('logs')
 }
 
 export default createLogger({
   transports: [
     new transports.Console({
       level: process.env.logger,
-      colorize: true,
     }),
     new transports.File({
-      level: process.env.logger,
       filename: 'logs/logs.log',
-      maxsize: 100000,
+      level: process.env.logger,
       maxFiles: 10,
+      maxsize: 100000,
     }),
   ],
-});
+})
