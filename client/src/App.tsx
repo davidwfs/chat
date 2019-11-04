@@ -1,25 +1,22 @@
 import React, {Component} from 'react';
 import socketIO from 'socket.io-client';
 
-const resToJSON = res => res.json();
+const resToJSON = (res: Response) => res.json()
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      author: '',
-      content: '',
-      messages: []
-    }
+  state = {
+    author: '',
+    content: '',
+    messages: []
   }
 
   componentWillMount() {
     const io = socketIO('ws://localhost:5000');
-    io.on('postMessage', message => this.setState({messages: [...this.state.messages, message]}));
+    io.on('postMessage', (message: string) => this.setState({messages: [...this.state.messages, message]}));
     this.loadMessages();
   }
 
-  onSubmit = (event) => {
+  onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
     const {author, content} = this.state;
     const headers = new Headers({
@@ -35,9 +32,8 @@ class App extends Component {
       .catch(console.log);
   }
 
-  handlerInput = (event) => {
-    const {target} = event
-    console.log({ [target.name]: target.value });
+  handlerInput = (event: React.ChangeEvent) => {
+    const target = event.target as HTMLInputElement
 
     this.setState({ [target.name]: target.value })
   }

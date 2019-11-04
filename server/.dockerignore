@@ -1,2 +1,14 @@
-/node_modules
-/dist
+node_modules/
+logs/
+dist/
+package-lock.json
+*.log
+yarn.lock
+.elasticbeanstalk/*
+.git
+.gitignore
+.circleci/*
+.vscode/*
+.elasticbeanstalk/*
+.git
+.gitignore
